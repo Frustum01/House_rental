@@ -1,19 +1,19 @@
 import React from 'react'
+import Videohome from "./Videohome"
+import Citieshead from '../home/cities/Citieshead'
 import "../../styles/HomePage/mainhome.css"
-import FlipWords from "./FlipWords"
-import NavBar from "./NavBar"
+import  CitiesView from "../home/cities/Citiesview"
+import Offices from './Offices'
+import Footer2 from './Footer2'
 
 const Mainhome = () => {
   return (
-    <div>
-        <div className="videomain">
-            <video autoPlay muted loop playsInline>
-                <source src='../../src/assets/video/videohome.mp4'/>
-            </video>
-        </div>
-        <div className="overlaycontent">
-           <FlipWords wordA="begins" wordB="where life" intervalMs={3000} />
-        </div>
+    <div className='main'>
+      <Videohome />
+      <Citieshead/>
+      <CitiesView/>
+      <Offices/>
+      <Footer2/>
     </div>
   )
 }

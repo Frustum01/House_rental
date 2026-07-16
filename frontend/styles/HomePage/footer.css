@@ -1,0 +1,73 @@
+.footer-container{
+    background-color: rgb(211, 255, 240);
+    padding-top:40px;
+    padding-bottom:60px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+.footer-content{
+    display: flex;
+    justify-content:space-between ;
+    height: 500px;
+}
+.left-side,.right-side{
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+}
+
+
+.icons{
+    font-size: 30px;
+    display:flex;
+    width: 100%;
+    gap:30px;
+}
+
+.certified{
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-bottom: 40px;
+}
+
+.add1,.add2,.add3{
+    font-size: 20px;
+    line-height: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.city-name{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.block1{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.block2{
+    padding: 0px 20px;
+    margin-top: 50px;
+}
+.contact{
+    padding: 20px;
+    font-size: 30px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+
+.footer2-animate{
+    height:630px;
+    overflow: hidden;
+}
+
+.fixed{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}

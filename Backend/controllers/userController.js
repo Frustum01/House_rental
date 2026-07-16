@@ -63,6 +63,7 @@ const createUser = async (req, res) => {
         });
 
         const userData = user.toObject();
+
         delete userData.password;
 
         return res.status(201).json({
@@ -104,8 +105,11 @@ const loginUser = async (req, res) => {
                 message: "Invalid Password"
             });
         }
-
-
+        if (!user.isActive) {
+            return res.status(403).json({
+                message: "User is blocked"
+            });
+        }
         const refreshToken = jwt.sign(
             { id: user._id },
             process.env.JWT_SECRET,
@@ -116,6 +120,9 @@ const loginUser = async (req, res) => {
             .createHash("sha256")
             .update(refreshToken)
             .digest("hex");
+
+        await SessionModel.updateMany({user: user._id, ip: req.ip, useragent: req.headers["user-agent"], revoked: false},{revoked: true});
+
 
         await SessionModel.create({
             user: user._id,
@@ -206,6 +213,40 @@ const logoutUser = async (req, res) => {
     }
 };
 
+const genrateAccess= async (req,res)=>{
+    try {
+        const refreshToken = req.cookies.refreshToken;
+    if(!refreshToken){
+        return res.status(401).json({
+            message:"Unothorized User"
+        })
+    }
+        const decoded = jwt.verify(refreshToken,process.env.JWT_SECRET);
+    const refreshTokenHash = crypto.createHash("sha256").update(refreshToken).digest("hex");
+
+    const session = await SessionModel.findOne({
+        refreshToken: refreshTokenHash,
+        revoked:false
+    });
+
+    if(!session){
+        return res.status(401).json({message:"not login"});
+    }
+    const user = await User.findById(session.user)
+    if(!user){return res.status(401).json({message:"user not found"})};
+
+    const accessToken = jwt.sign(
+        {id:user._id},
+        process.env.JWT_SECRET,
+        {expiresIn:"15m"}
+    );
+
+    return res.status(200).json({message:"created new tocken",accessToken});
+    } catch (error) {
+        res.send(500).json(error.message)
+    }
+}
+
 
 // forgot the password
 
@@ -224,9 +265,16 @@ const forgotPassword=(req,res)=>{
     }
 }
 
+    const getprofile = (req, res) => {
+        return res.status(200).json({
+            user: req.user
+        });
+    };
 export {
     createUser,
     loginUser,
     logoutUser,
-    forgotPassword
+    genrateAccess,
+    forgotPassword,
+    getprofile
 };

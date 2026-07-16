@@ -3,10 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.main{
+    height: 300vh;
+}
 .videomain video {
     width: 100%;
     position: relative;
+    
 }
 .overlaycontent{
     position: absolute;
@@ -21,7 +24,7 @@
     -webkit-text-stroke: 5px white;
 }
 .navbar-container{
-    position: absolute;
+    position: fixed;;
     top: 0;
     left: 0;
     width: 100%;
@@ -65,3 +68,4 @@
     cursor: pointer;
     
 }
+

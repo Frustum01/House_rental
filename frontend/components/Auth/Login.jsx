@@ -3,11 +3,13 @@ import Social from "./Social.jsx"
 import { motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = ({onLogin}) => {
   const [email,setemail] = useState("");
   const [password,setpassword] = useState("")
+  const navigate = useNavigate();
   
   const loginHandle = async(e)=>{
     e.preventDefault();
@@ -18,7 +20,7 @@ const Login = ({onLogin}) => {
         password
       })
 
-      alert(responce.data.message);
+      navigate("/home");
     } catch (error) {
       
       alert(error.response.data.message)

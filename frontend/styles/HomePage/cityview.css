@@ -1,0 +1,142 @@
+
+.cities-scroll-track {
+  position: relative;
+  height: 300vh;
+}
+
+
+.cities-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:#f8f8f8;
+
+.cities-grid {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  overflow: hidden;
+  will-change: transform;
+}
+
+.cities-grid-cell {
+  position: relative;
+  overflow: hidden;
+  will-change: border-radius, transform;
+  transform: translateZ(0);
+}
+
+.cities-grid-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cities-grid-cell::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55),
+    rgba(255, 255, 255, 0)
+  );
+  pointer-events: none;
+}
+
+.cities-cell-label {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+}
+
+.cities-cell-name {
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cities-cell-count {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+
+.cities-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.cities-overlay-eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin: 0 0 12px;
+}
+
+.cities-overlay-title {
+  font-size: clamp(40px, 7vw, 96px);
+  font-weight: 600;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.cities-overlay-sub {
+  font-size: 16px;
+  opacity: 0.85;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .cities-scroll-track {
+    height: 300vh;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .cities-scroll-track {
+    height: auto;
+  }
+  .cities-sticky {
+    position: relative;
+    height: 100vh;
+  }
+  .cities-grid {
+    gap: 0 !important;
+    border-radius: 0 !important;
+  }
+  .cities-overlay {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .cities-cell-label {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
